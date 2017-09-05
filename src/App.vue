@@ -1,7 +1,9 @@
 <template>
   <div id="app">
 
-    <game-board></game-board>
+    <game-board
+      :cellClicked="cellClicked"
+    ></game-board>
 
   </div>
 </template>
@@ -13,6 +15,11 @@ export default {
   name: 'app',
   components: {
     'game-board': GameBoard
+  },
+  methods: {
+    cellClicked (args) {
+      console.log(args)
+    }
   }
 }
 </script>

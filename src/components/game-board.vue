@@ -1,8 +1,8 @@
 <template>
 
-  <div class="game-board">
+  <div class="game-board" :cellClicked="cellClicked(args)">
 
-    <div v-for="row in height" class="row">
+    <div v-for="row in height" class="row" :cellClicked="cellClicked(args)">
 
       <div
         v-for="col in width"
@@ -11,6 +11,7 @@
         class="cell"
         :index="getIndex(col, row)"
         :style="{ 'background-color': colors[(getIndex(col, row) - row) % colors.length] }"
+        @click="cellClicked({ x: col, y: row, index: getIndex(col, row) })"
         >
 
 
@@ -28,7 +29,7 @@
 export default {
   props: {
     colors: {
-      default: ['#fff', '#000'],
+      default: () => { return ['#fff', '#000'] },
       type: Array
     },
     width: {
@@ -43,19 +44,30 @@ export default {
   methods: {
     getIndex (col, row) {
       return (row - 1) * this.height + col
+    },
+    cellClicked (args) {
+      this.$emit('cellClicked', args)
+    },
+    passToParent (args) {
+      this.$emit('cell-clicked', args)
     }
   }
 }
 
 </script>
 
-<style>
+<style scoped>
 
+.game-board {
+  font-size: 0;
+  border: 1px solid #000;
+  display: inline-block;
+}
 .cell {
   display: inline-block;
   width: 100px;
   height: 100px;
-  border: 2px solid #000;
+  line-height: 0;
 }
 
 </style>

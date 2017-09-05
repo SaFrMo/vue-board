@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+
+    <game-board></game-board>
+
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import GameBoard from './components/game-board.vue'
 
 export default {
   name: 'app',
   components: {
-    Hello
+    'game-board': GameBoard
   }
 }
 </script>
